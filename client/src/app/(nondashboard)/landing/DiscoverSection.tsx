@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,7 +43,7 @@ const DiscoverSection = () => {
             your dream rental property!
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 xl:gap-16 text-center">
           {[
             {
               imageSrc: "/landing-icon-wand.png",
