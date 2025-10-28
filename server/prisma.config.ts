@@ -1,3 +1,8 @@
+// Load environment variables from .env when this config is loaded by the Prisma CLI.
+// When a TypeScript Prisma config exists, the CLI will skip automatic .env loading
+// — importing dotenv here ensures `env("DATABASE_URL")` works when running
+// `prisma` commands from the project root.
+import 'dotenv/config';
 import { defineConfig, env } from "prisma/config";
 
 export default defineConfig({
