@@ -24,3 +24,4 @@ export const getTenant = async (req: Request, res: Response): Promise<void> => {
       .json({ message: `Error retrieving tenant: ${error.message}` });
   }
 };
+
