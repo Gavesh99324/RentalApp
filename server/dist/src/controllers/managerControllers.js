@@ -9,36 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTenant = exports.getTenant = void 0;
-const client_1 = require("@prisma/client"); //initialize and call backend database
+exports.createManager = exports.getManager = void 0;
+const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const getTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getManager = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { cognitoId } = req.params;
-        const tenant = yield prisma.tenant.findUnique({
+        const manager = yield prisma.manager.findUnique({
             where: { cognitoId },
-            include: {
-                favorites: true,
-            },
         });
-        if (tenant) {
-            res.json(tenant);
+        if (manager) {
+            res.json(manager);
         }
         else {
-            res.status(404).json({ message: "Tenant not found" });
+            res.status(404).json({ message: "Manager not found" });
         }
     }
     catch (error) {
         res
             .status(500)
-            .json({ message: `Error retrieving tenant: ${error.message}` });
+            .json({ message: `Error retrieving manager: ${error.message}` });
     }
 });
-exports.getTenant = getTenant;
-const createTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getManager = getManager;
+const createManager = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { cognitoId, name, email, phoneNumber } = req.body;
-        const tenant = yield prisma.tenant.create({
+        const manager = yield prisma.manager.create({
             data: {
                 cognitoId,
                 name,
@@ -46,12 +43,12 @@ const createTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 phoneNumber,
             },
         });
-        res.status(201).json(tenant);
+        res.status(201).json(manager);
     }
     catch (error) {
         res
             .status(500)
-            .json({ message: `Error creating tenant: ${error.message}` });
+            .json({ message: `Error creating manager: ${error.message}` });
     }
 });
-exports.createTenant = createTenant;
+exports.createManager = createManager;

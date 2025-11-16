@@ -3,8 +3,23 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useGetAuthUserQuery } from "@/state/api";
+import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+
+  const { data: authUser } = useGetAuthUserQuery();
+  const router = useRouter();
+  const pathname = usePathname()
+
+  const isDashboardPage = pathname.includes("/managers") || pathname.includes("/tenants");
+
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/"
+  }
+
   return (
     <div
       className="fixed top-0 left-0 w-full z-50 shadow-xl"
