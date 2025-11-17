@@ -110,10 +110,10 @@ const Navbar = () => {
                     <AvatarFallback className="bg-primary-600">
                       {authUser.userRole?.[0].toUpperCase()}
                     </AvatarFallback>
-                    <p className="text-primary-200 hidden md:block">
-                      {authUser.userInfo?.name}
-                    </p>
                   </Avatar>
+                  <p className="text-primary-200 hidden md:block">
+                    {authUser.userInfo?.name}
+                  </p>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white text-primary-700">
                   <DropdownMenuItem
