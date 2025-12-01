@@ -6,7 +6,16 @@ import { useAppSelector } from "@/state/redux";
 import { useGetPropertiesQuery } from "@/state/api";
 import { Property } from "@/types/prismaTypes";
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
+// Set Mapbox token if available; otherwise warn and defer map rendering.
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+if (MAPBOX_TOKEN) {
+  mapboxgl.accessToken = MAPBOX_TOKEN;
+} else {
+  // Leave accessToken empty (Mapbox will complain if we try to instantiate without one)
+  console.warn(
+    "Mapbox access token missing: set NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN in .env.local"
+  );
+}
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -19,9 +28,11 @@ const Map = () => {
 
   useEffect(() => {
     if (isLoading || isError || !properties) return;
+    if (!MAPBOX_TOKEN) return; // Do not attempt map without token
+    if (!mapContainerRef.current) return;
 
     const map = new mapboxgl.Map({
-      container: mapContainerRef.current!,
+      container: mapContainerRef.current,
       style: "mapbox://styles/majesticglue/cm6u301pq008b01sl7yk1cnvb",
       center: filters.coordinates || [-74.5, 40],
       zoom: 9,
@@ -34,16 +45,19 @@ const Map = () => {
       if (path) path.setAttribute("fill", "#000000");
     });
 
-    const resizeMap = () => {
-      if (map) setTimeout(() => map.resize(), 700);
-    };
-    resizeMap();
-
+    setTimeout(() => map.resize(), 700);
     return () => map.remove();
   }, [isLoading, isError, properties, filters.coordinates]);
 
   if (isLoading) return <>Loading...</>;
   if (isError || !properties) return <div>Failed to fetch properties</div>;
+  if (!MAPBOX_TOKEN)
+    return (
+      <div className="p-4 rounded-md bg-yellow-50 text-yellow-800 text-sm">
+        Map unavailable: add <code>NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN</code> to
+        <code>.env.local</code> and restart.
+      </div>
+    );
 
   return (
     <div className="basis-5/12 grow relative rounded-xl">
