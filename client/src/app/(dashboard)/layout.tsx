@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           userRole === "manager"
             ? "/managers/properties"
             : "/tenants/favorites",
-          { scroll: false }
+          { scroll: false },
         );
       } else {
         setIsLoading(false);
@@ -40,13 +40,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <SidebarProvider>
       <div className="min-h-screen w-full bg-primary-100">
         <Navbar />
-        <div style={{ marginTop: `${NAVBAR_HEIGHT}px` }}>
-          <main className="flex">
-            <Sidebar userType={authUser.userRole.toLowerCase()} />
-            <div className="flex-grow transition-all duration-300">
-              {children}
-            </div>
-          </main>
+        <div
+          className="flex w-full"
+          style={{ marginTop: `${NAVBAR_HEIGHT}px` }}
+        >
+          <Sidebar userType={authUser.userRole.toLowerCase()} />
+          <main className="flex-1 w-full px-8 py-6">{children}</main>
         </div>
       </div>
     </SidebarProvider>

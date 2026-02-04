@@ -63,7 +63,7 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
             <div
               className={cn(
                 "flex min-h-[56px] w-full items-center pt-3 mb-3",
-                open ? "justify-between px-6" : "justify-center"
+                open ? "justify-between px-6" : "justify-center",
               )}
             >
               {open ? (
@@ -100,29 +100,30 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
               <SidebarMenuItem key={link.href}>
                 <SidebarMenuButton
                   asChild
+                  isActive={isActive}
+                  tooltip={link.label}
+                  size="lg"
                   className={cn(
-                    "flex items-center px-7 py-7",
                     isActive
-                      ? "bg-gray-100"
+                      ? "bg-gray-100 text-blue-600"
                       : "text-gray-600 hover:bg-gray-100",
-                    open ? "text-blue-600" : "ml-[5px]"
                   )}
                 >
-                  <Link href={link.href} className="w-full" scroll={false}>
-                    <div className="flex items-center gap-3">
-                      <link.icon
-                        className={`h-5 w-5 ${
-                          isActive ? "text-blue-600" : "text-gray-600"
-                        }`}
-                      />
-                      <span
-                        className={`font-medium ${
-                          isActive ? "text-blue-600" : "text-gray-600"
-                        }`}
-                      >
-                        {link.label}
-                      </span>
-                    </div>
+                  <Link href={link.href} scroll={false}>
+                    <link.icon
+                      className={`h-5 w-5 ${
+                        isActive ? "text-blue-600" : "text-gray-600"
+                      }`}
+                    />
+                    <span
+                      className={cn(
+                        "font-medium",
+                        isActive ? "text-blue-600" : "text-gray-600",
+                        !open && "hidden",
+                      )}
+                    >
+                      {link.label}
+                    </span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
