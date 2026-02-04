@@ -28,7 +28,7 @@ const FiltersBar = () => {
   const pathname = usePathname();
   const filters = useAppSelector((state) => state.global.filters);
   const isFiltersFullOpen = useAppSelector(
-    (state) => state.global.isFiltersFullOpen
+    (state) => state.global.isFiltersFullOpen,
   );
   const viewMode = useAppSelector((state) => state.global.viewMode);
   const [searchInput, setSearchInput] = useState(filters.location);
@@ -40,7 +40,7 @@ const FiltersBar = () => {
     Object.entries(cleanFilters).forEach(([key, value]) => {
       updatedSearchParams.set(
         key,
-        Array.isArray(value) ? value.join(",") : value.toString()
+        Array.isArray(value) ? value.join(",") : value.toString(),
       );
     });
 
@@ -50,7 +50,7 @@ const FiltersBar = () => {
   const handleFilterChange = (
     key: string,
     value: any,
-    isMin: boolean | null
+    isMin: boolean | null,
   ) => {
     let newValue = value;
 
@@ -76,10 +76,10 @@ const FiltersBar = () => {
     try {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-          searchInput
+          searchInput,
         )}.json?access_token=${
           process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
-        }&fuzzyMatch=true`
+        }&fuzzyMatch=true`,
       );
       const data = await response.json();
       if (data.features && data.features.length > 0) {
@@ -88,7 +88,7 @@ const FiltersBar = () => {
           setFilters({
             location: searchInput,
             coordinates: [lng, lat],
-          })
+          }),
         );
       }
     } catch (err) {
@@ -105,7 +105,7 @@ const FiltersBar = () => {
           variant="outline"
           className={cn(
             "gap-2 rounded-xl border-primary-400 hover:bg-primary-500 hover:text-primary-100",
-            isFiltersFullOpen && "bg-primary-700 text-primary-100"
+            isFiltersFullOpen && "bg-primary-700 text-primary-100",
           )}
           onClick={() => dispatch(toggleFiltersFullOpen())}
         >
@@ -220,7 +220,7 @@ const FiltersBar = () => {
             handleFilterChange("propertyType", value, null)
           }
         >
-          <SelectTrigger className="w-32 rounded-xl border-primary-400">
+          <SelectTrigger className="w-40 rounded-xl border-primary-400">
             <SelectValue placeholder="Home Type" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -244,7 +244,7 @@ const FiltersBar = () => {
             variant="ghost"
             className={cn(
               "px-3 py-1 rounded-none rounded-l-xl hover:bg-primary-600 hover:text-primary-50",
-              viewMode === "list" ? "bg-primary-700 text-primary-50" : ""
+              viewMode === "list" ? "bg-primary-700 text-primary-50" : "",
             )}
             onClick={() => dispatch(setViewMode("list"))}
           >
@@ -254,7 +254,7 @@ const FiltersBar = () => {
             variant="ghost"
             className={cn(
               "px-3 py-1 rounded-none rounded-r-xl hover:bg-primary-600 hover:text-primary-50",
-              viewMode === "grid" ? "bg-primary-700 text-primary-50" : ""
+              viewMode === "grid" ? "bg-primary-700 text-primary-50" : "",
             )}
             onClick={() => dispatch(setViewMode("grid"))}
           >
