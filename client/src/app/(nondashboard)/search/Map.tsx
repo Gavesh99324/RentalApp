@@ -13,7 +13,7 @@ if (MAPBOX_TOKEN) {
 } else {
   // Leave accessToken empty (Mapbox will complain if we try to instantiate without one)
   console.warn(
-    "Mapbox access token missing: set NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN in .env.local"
+    "Mapbox access token missing: set NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN in .env.local",
   );
 }
 
@@ -33,7 +33,7 @@ const Map = () => {
 
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/majesticglue/cm6u301pq008b01sl7yk1cnvb",
+      style: "mapbox://styles/mapbox/streets-v12",
       center: filters.coordinates || [-74.5, 40],
       zoom: 9,
     });
@@ -92,8 +92,8 @@ const createPropertyMarker = (property: Property, map: mapboxgl.Map) => {
             </p>
           </div>
         </div>
-        `
-      )
+        `,
+      ),
     )
     .addTo(map);
   return marker;
