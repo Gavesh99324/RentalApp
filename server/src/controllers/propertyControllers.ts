@@ -8,9 +8,22 @@ import axios from "axios";
 
 const prisma = new PrismaClient();
 
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
-});
+// S3/MinIO Client Configuration
+const s3ClientConfig: any = {
+  region: process.env.AWS_REGION || "us-east-1",
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+  },
+};
+
+// Add MinIO endpoint if configured (for local development or MinIO deployment)
+if (process.env.AWS_ENDPOINT) {
+  s3ClientConfig.endpoint = process.env.AWS_ENDPOINT;
+  s3ClientConfig.forcePathStyle = process.env.AWS_S3_FORCE_PATH_STYLE === "true";
+}
+
+const s3Client = new S3Client(s3ClientConfig);
 
 export const getProperties = async (
   req: Request,

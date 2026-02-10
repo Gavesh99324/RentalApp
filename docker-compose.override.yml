@@ -1,0 +1,38 @@
+# Docker Compose Override for Development
+# This file automatically extends docker-compose.yml in development
+# Usage: docker-compose up (automatically applies both files)
+
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: builder  # Use builder stage for development
+    volumes:
+      # Mount source code for hot reload
+      - ./server/src:/app/src:ro
+      - ./server/prisma:/app/prisma:ro
+    command: npm run dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - "9229:9229"  # Node.js debugger port
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: builder  # Use builder stage for development
+    volumes:
+      # Mount source code for hot reload
+      - ./client/src:/app/src:ro
+      - ./client/public:/app/public:ro
+    command: npm run dev
+    environment:
+      NODE_ENV: development
+
+  # Enable pgAdmin in development
+  pgadmin:
+    profiles: []  # Remove profile to enable by default

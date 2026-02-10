@@ -25,10 +25,23 @@ app.use(helmet_1.default.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use((0, morgan_1.default)("common"));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use((0, cors_1.default)());
+// CORS Configuration
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus: 200,
+};
+app.use((0, cors_1.default)(corsOptions));
 /* ROUTES */
 app.get("/", (req, res) => {
     res.send("This is home route");
+});
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "healthy",
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || "development"
+    });
 });
 app.use("/applications", applicationRoutes_1.default);
 app.use("/properties", propertyRoutes_1.default);

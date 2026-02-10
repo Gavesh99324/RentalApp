@@ -1,7 +1,17 @@
 /node_modules
 .DS_Store
 *.log
-.env*
 
+# Environment files - NEVER commit these!
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# Keep .env.example
+!.env.example
 
 /src/generated/prisma
+dist/
