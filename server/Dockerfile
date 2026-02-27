@@ -3,6 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Set dummy DATABASE_URL for build stage (Prisma generate doesn't need real DB)
+ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
+
 # Copy package files
 COPY package*.json ./
 COPY prisma ./prisma/
@@ -23,6 +26,9 @@ RUN npm run build
 FROM node:20-alpine
 
 WORKDIR /app
+
+# Set dummy DATABASE_URL for dependency installation (will be overridden at runtime)
+ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
 
 # Install production dependencies only
 COPY package*.json ./

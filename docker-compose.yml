@@ -1,15 +1,15 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  # PostgreSQL Database
+  # PostgreSQL Database with PostGIS
   postgres:
-    image: postgres:16-alpine
+    image: postgis/postgis:16-3.4-alpine
     container_name: rentalapp-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-rentalapp}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme123}
-      POSTGRES_DB: ${POSTGRES_DB:-rentalapp_db}
+      POSTGRES_DB: ${POSTGRES_DB:-rentalapp}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
@@ -17,7 +17,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./server/prisma/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rentalapp}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-rentalapp} -d ${POSTGRES_DB:-rentalapp}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -78,8 +82,8 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: ${SERVER_PORT:-3001}
-      DATABASE_URL: postgresql://${POSTGRES_USER:-rentalapp}:${POSTGRES_PASSWORD:-changeme123}@postgres:5432/${POSTGRES_DB:-rentalapp_db}?schema=public
-      
+      DATABASE_URL: postgresql://${POSTGRES_USER:-rentalapp}:${POSTGRES_PASSWORD:-changeme123}@postgres:5432/${POSTGRES_DB:-rentalapp}?schema=public
+
       # MinIO Configuration (S3-compatible)
       AWS_REGION: ${AWS_REGION:-us-east-1}
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
@@ -87,23 +91,29 @@ services:
       AWS_S3_BUCKET_NAME: ${MINIO_BUCKET_NAME:-rentalapp-properties}
       AWS_ENDPOINT: http://minio:9000
       AWS_S3_FORCE_PATH_STYLE: "true"
-      
+
       # JWT/Auth Configuration
       JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
-      
+
       # CORS Configuration
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
-      
+
       # AWS Cognito (if using)
       AWS_COGNITO_REGION: ${AWS_COGNITO_REGION:-eu-north-1}
       AWS_COGNITO_USER_POOL_ID: ${AWS_COGNITO_USER_POOL_ID}
-      
+
     ports:
       - "${SERVER_PORT:-3001}:3001"
     volumes:
       - ./server/prisma:/app/prisma
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -130,7 +140,15 @@ services:
     ports:
       - "${CLIENT_PORT:-3000}:3000"
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -150,7 +168,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@rentalapp.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_SERVER_MODE: "False"
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     volumes:
