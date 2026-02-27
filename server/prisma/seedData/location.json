@@ -88,5 +88,140 @@
     "address": "789 Rodeo Dr",
     "postalCode": "90210",
     "coordinates": "POINT(-118.400356 34.073620)"
+  },
+  {
+    "id": 11,
+    "country": "United States",
+    "city": "Chicago",
+    "state": "IL",
+    "address": "123 Michigan Ave",
+    "postalCode": "60601",
+    "coordinates": "POINT(-87.6298 41.8781)"
+  },
+  {
+    "id": 12,
+    "country": "United States",
+    "city": "Seattle",
+    "state": "WA",
+    "address": "456 Pike St",
+    "postalCode": "98101",
+    "coordinates": "POINT(-122.3321 47.6062)"
+  },
+  {
+    "id": 13,
+    "country": "United States",
+    "city": "Austin",
+    "state": "TX",
+    "address": "789 Congress Ave",
+    "postalCode": "78701",
+    "coordinates": "POINT(-97.7431 30.2672)"
+  },
+  {
+    "id": 14,
+    "country": "United States",
+    "city": "Boston",
+    "state": "MA",
+    "address": "101 Boylston St",
+    "postalCode": "02116",
+    "coordinates": "POINT(-71.0589 42.3601)"
+  },
+  {
+    "id": 15,
+    "country": "United States",
+    "city": "Denver",
+    "state": "CO",
+    "address": "222 Broadway",
+    "postalCode": "80203",
+    "coordinates": "POINT(-104.9903 39.7392)"
+  },
+  {
+    "id": 16,
+    "country": "United States",
+    "city": "Portland",
+    "state": "OR",
+    "address": "333 SW Morrison St",
+    "postalCode": "97204",
+    "coordinates": "POINT(-122.6750 45.5152)"
+  },
+  {
+    "id": 17,
+    "country": "United States",
+    "city": "San Francisco",
+    "state": "CA",
+    "address": "444 Market St",
+    "postalCode": "94102",
+    "coordinates": "POINT(-122.4194 37.7749)"
+  },
+  {
+    "id": 18,
+    "country": "United States",
+    "city": "Atlanta",
+    "state": "GA",
+    "address": "555 Peachtree St",
+    "postalCode": "30308",
+    "coordinates": "POINT(-84.3880 33.7490)"
+  },
+  {
+    "id": 19,
+    "country": "United States",
+    "city": "Nashville",
+    "state": "TN",
+    "address": "666 Broadway",
+    "postalCode": "37203",
+    "coordinates": "POINT(-86.7816 36.1627)"
+  },
+  {
+    "id": 20,
+    "country": "United States",
+    "city": "Phoenix",
+    "state": "AZ",
+    "address": "777 Central Ave",
+    "postalCode": "85004",
+    "coordinates": "POINT(-112.0740 33.4484)"
+  },
+  {
+    "id": 21,
+    "country": "United States",
+    "city": "San Diego",
+    "state": "CA",
+    "address": "888 Broadway",
+    "postalCode": "92101",
+    "coordinates": "POINT(-117.1611 32.7157)"
+  },
+  {
+    "id": 22,
+    "country": "United States",
+    "city": "Las Vegas",
+    "state": "NV",
+    "address": "999 Las Vegas Blvd",
+    "postalCode": "89101",
+    "coordinates": "POINT(-115.1398 36.1699)"
+  },
+  {
+    "id": 23,
+    "country": "United States",
+    "city": "Philadelphia",
+    "state": "PA",
+    "address": "111 Market St",
+    "postalCode": "19106",
+    "coordinates": "POINT(-75.1652 39.9526)"
+  },
+  {
+    "id": 24,
+    "country": "United States",
+    "city": "Washington",
+    "state": "DC",
+    "address": "222 Pennsylvania Ave",
+    "postalCode": "20004",
+    "coordinates": "POINT(-77.0369 38.9072)"
+  },
+  {
+    "id": 25,
+    "country": "United States",
+    "city": "Brooklyn",
+    "state": "NY",
+    "address": "333 Atlantic Ave",
+    "postalCode": "11201",
+    "coordinates": "POINT(-73.9442 40.6782)"
   }
 ]

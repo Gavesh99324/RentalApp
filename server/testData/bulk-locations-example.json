@@ -1,0 +1,31 @@
+{
+  "locations": [
+    {
+      "address": "100 Market St",
+      "city": "Dallas",
+      "state": "TX",
+      "country": "United States",
+      "postalCode": "75201",
+      "latitude": 32.7767,
+      "longitude": -96.797
+    },
+    {
+      "address": "200 Peachtree St",
+      "city": "Houston",
+      "state": "TX",
+      "country": "United States",
+      "postalCode": "77002",
+      "latitude": 29.7604,
+      "longitude": -95.3698
+    },
+    {
+      "address": "300 Main Ave",
+      "city": "Minneapolis",
+      "state": "MN",
+      "country": "United States",
+      "postalCode": "55401",
+      "latitude": 44.9778,
+      "longitude": -93.265
+    }
+  ]
+}

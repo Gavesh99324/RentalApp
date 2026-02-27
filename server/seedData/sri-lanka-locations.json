@@ -1,0 +1,92 @@
+[
+  {
+    "id": 26,
+    "country": "Sri Lanka",
+    "city": "Colombo",
+    "state": "Western Province",
+    "address": "123 Galle Road",
+    "postalCode": "00100",
+    "coordinates": "POINT(79.8612 6.9271)"
+  },
+  {
+    "id": 27,
+    "country": "Sri Lanka",
+    "city": "Kandy",
+    "state": "Central Province",
+    "address": "456 Peradeniya Road",
+    "postalCode": "20000",
+    "coordinates": "POINT(80.6337 7.2906)"
+  },
+  {
+    "id": 28,
+    "country": "Sri Lanka",
+    "city": "Galle",
+    "state": "Southern Province",
+    "address": "789 Fort Street",
+    "postalCode": "80000",
+    "coordinates": "POINT(80.2170 6.0535)"
+  },
+  {
+    "id": 29,
+    "country": "Sri Lanka",
+    "city": "Negombo",
+    "state": "Western Province",
+    "address": "101 Beach Road",
+    "postalCode": "11500",
+    "coordinates": "POINT(79.8358 7.2008)"
+  },
+  {
+    "id": 30,
+    "country": "Sri Lanka",
+    "city": "Jaffna",
+    "state": "Northern Province",
+    "address": "222 Hospital Road",
+    "postalCode": "40000",
+    "coordinates": "POINT(80.0074 9.6615)"
+  },
+  {
+    "id": 31,
+    "country": "Sri Lanka",
+    "city": "Nuwara Eliya",
+    "state": "Central Province",
+    "address": "333 Queen's Drive",
+    "postalCode": "22200",
+    "coordinates": "POINT(80.7891 6.9497)"
+  },
+  {
+    "id": 32,
+    "country": "Sri Lanka",
+    "city": "Batticaloa",
+    "state": "Eastern Province",
+    "address": "444 Main Street",
+    "postalCode": "30000",
+    "coordinates": "POINT(81.7022 7.7307)"
+  },
+  {
+    "id": 33,
+    "country": "Sri Lanka",
+    "city": "Trincomalee",
+    "state": "Eastern Province",
+    "address": "555 Harbor Road",
+    "postalCode": "31000",
+    "coordinates": "POINT(81.2152 8.5874)"
+  },
+  {
+    "id": 34,
+    "country": "Sri Lanka",
+    "city": "Matara",
+    "state": "Southern Province",
+    "address": "666 Beach Road",
+    "postalCode": "81000",
+    "coordinates": "POINT(80.5353 5.9549)"
+  },
+  {
+    "id": 35,
+    "country": "Sri Lanka",
+    "city": "Anuradhapura",
+    "state": "North Central Province",
+    "address": "777 Sacred City Road",
+    "postalCode": "50000",
+    "coordinates": "POINT(80.3964 8.3114)"
+  }
+]

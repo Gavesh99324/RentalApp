@@ -11,6 +11,7 @@ import managerRoutes from "./routes/managerRoutes";
 import propertyRoutes from "./routes/propertyRoutes";
 import leaseRoutes from "./routes/leaseRoutes";
 import applicationRoutes from "./routes/applicationRoutes";
+import bulkImportRoutes from "./routes/bulkImportRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -36,10 +37,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ 
-    status: "healthy", 
+  res.status(200).json({
+    status: "healthy",
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || "development"
+    environment: process.env.NODE_ENV || "development",
   });
 });
 
@@ -48,6 +49,7 @@ app.use("/properties", propertyRoutes);
 app.use("/leases", leaseRoutes);
 app.use("/tenants", authMiddleware(["tenant"]), tenantRoutes);
 app.use("/managers", authMiddleware(["manager"]), managerRoutes);
+app.use("/bulk", bulkImportRoutes);
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3002;
